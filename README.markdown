@@ -1,6 +1,5 @@
-He Said She Said Application
-
 Note: These instructions apply to a fresh install on OS X 10.8.2.
+Note: Heroku is the expected production environment.
 
 (1) Install Xcode 4.5.1 (available in the App Store)
 (2) Install Xcode Command Line Tools (Xcode -> Preferences -> Downloads -> Command Line Tools -> Install)
@@ -82,33 +81,36 @@ Note: These instructions apply to a fresh install on OS X 10.8.2.
     https://toolbelt.heroku.com
     heroku login
 
-(12) Create a DB user for the application:
+(12) Configure environment variables
+    The application relies on a number of environment variables. Those can be found in config/environments/heroku-environment-variables.txt there are also other locations in the code base that should be customized for your deployment. You can search the code base for "FILL_ME_IN" to find those. Good candidates for environment variables.
+
+(13) Create a DB user for the application:
 
     createuser --interactive he-said-she-said
     Shall the new role be a superuser? (y/n) n
     Shall the new role be allowed to create databases? (y/n) y
     Shall the new role be allowed to create more new roles? (y/n) n
 
-(13) Create a he-said-she-said Gemset:
+(14) Create a he-said-she-said Gemset:
 
     rvm gemset create he-said-she-said
     rvm gemset use he-said-she-said
 
-(14) Install all Gems:
+(15) Install all Gems:
 
     bundle install
 
     Note: If you get a "can't convert nil into Integer (TypeError)" while installing kgio, see the following thread:
           https://github.com/wayneeseguin/rvm/issues/1157
 
-(15) Create and populate application databases:
+(16) Create and populate application databases:
 
     bundle exec rake db:create:all db:migrate said:populate
 
-(16) Start all processes:
+(17) Start all processes:
 
     foreman start
 
-(17) Start Guard and Spork:
+(18) Start Guard and Spork:
 
     bundle exec guard
