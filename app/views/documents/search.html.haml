@@ -1,0 +1,100 @@
+.row
+  .span8
+    %h3 Documents matching your search
+    %form.navbar-form.form-search{:action => "/documents/search"}
+      .input-append
+        %input.input-xxlarge.search-query{:placeholder => "#{params[:q]}", :value => "#{params[:q]}", :type => "text", :name => "q"}/
+        %button.btn{:type => "submit"} Search
+
+.row
+  .span8
+    - for document in @documents
+      .row
+        .span8
+          %h5
+            = link_to document.load.display_title, document_path(document.load.guid)
+          - if !document.load.extracted_text.nil?
+            %p
+              - if !document.highlight.nil?
+                = simple_format(safe_squeeze(document.highlight.extracted_text[0].titlecase))
+              - else
+                = simple_format(safe_squeeze(document.load.extracted_text[0..300].titlecase))
+          - else
+            %p.small.muted We haven't yet extracted text from this document.
+      %table.table.table-condensed
+        %tbody
+          %tr
+            %td.muted City
+            %td= link_to document.load.municipality.full_name, municipality_path(document.load.municipality)
+            %td.muted Relevant date
+            %td
+              = time_tag document.load.likely_date unless document.load.likely_date.nil?
+          %tr
+            %td.muted Org
+            %td
+              = link_to document.load.legislative_body.humanize.titlecase, "/documents/search?q=#{document.load.legislative_body.humanize}" unless document.load.legislative_body.nil?
+            %td.muted Found
+            %td= time_tag document.load.created_at
+          %tr
+            %td.muted Type
+            %td
+              = link_to document.load.classification.humanize.titlecase, "/documents/search?q=#{document. load.classification.humanize}" unless document.load.classification.nil?
+            %td.muted Updated
+            %td= time_tag document.load.updated_at
+          %tr
+            %td{:colspan => 4}
+              %small
+                =link_to CGI::unescape(document.load.content_url.ellipsisize(100,50)), document.load.content_url
+      %br
+
+  .span3.offset1
+    %h5
+      Found within
+    .well
+      %ul
+        %li
+          = link_to "Any time", documents_search_path(:q => "#{params[:q].gsub(/\spast:\d+/, '')}")
+        %li
+          = link_to "Past 24 hours", documents_search_path(:q => "#{params[:q]} past:1")
+        %li
+          = link_to "Past week", documents_search_path(:q => "#{params[:q]} past:7")
+        %li
+          = link_to "Past month", documents_search_path(:q => "#{params[:q]} past:30")
+        %li
+          = link_to "Past year", documents_search_path(:q => "#{params[:q]} past:365")
+
+    %h5
+      Document dates mentioned
+    .well
+      %ul
+        %li
+          = link_to "Any time", documents_search_path(:q => "#{params[:q].gsub(/\spublished_past:\d+/, '')}")
+        %li
+          = link_to "48h window", documents_search_path(:q => "#{params[:q]} published_past:1")
+        %li
+          = link_to "3d window", documents_search_path(:q => "#{params[:q]} published_past:3")
+        %li
+          = link_to "7d window", documents_search_path(:q => "#{params[:q]} published_past:7")
+        %li
+          = link_to "30d window", documents_search_path(:q => "#{params[:q]} published_past:30")
+
+    - for facet in @facets
+      %h5
+        = facet[0].humanize.titleize
+      .well
+        %ul
+          %li= link_to "Any #{facet[0].humanize.titleize}", documents_search_path(:q => "#{params[:q].gsub(/\s#{facet[0]}:\w+/, '')}")
+          - for term in facet[1]["terms"]
+            %li
+              - if facet[0] === "municipality_state"
+                = link_to "#{term['term']} (#{term['count']})", documents_search_path(:q => "#{params[:q]} #{facet[0].downcase}:#{term['term']}")
+              - else
+                = link_to "#{term['term'].humanize} (#{term['count']})", documents_search_path(:q => "#{params[:q]} #{facet[0].downcase}:#{term['term']}")
+
+.row
+  .span8
+    - if !current_user.nil?
+      = will_paginate @documents
+    - else
+      .alert
+        %p Viewing more than a single page of documents requires a <a href="/users/sign_up">FREE account</a>.

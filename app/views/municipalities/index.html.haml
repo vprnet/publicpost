@@ -1,0 +1,19 @@
+.row
+  .span8
+    %h3 What is Municipal Docs?
+    %p A service that allows anyone interested in local government to stay informed and be alerted about topics that interest them.
+
+.row
+  .span4
+    %h3 States
+    %ul
+      - for state in @states.sort
+        %li
+          = link_to state, state_documents_path(state)
+
+  .span4
+    %h3 Communities
+    %ul
+      - for municipality in @municipalities
+        %li
+          = link_to(municipality.full_name, municipality)

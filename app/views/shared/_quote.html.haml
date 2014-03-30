@@ -1,0 +1,13 @@
+.mention-block
+  .mention.header
+    = image_tag('female.jpeg', class: 'person-avatar small')
+    %p
+      %strong
+        - person = Entity.find_by_guid(quote.guid)
+        = person.nil? ? "" : person.name
+
+
+  .mention    
+    %p= quote.instances.first.exact
+    - unless @document.nil?
+      .details= @document.last_modified

@@ -1,0 +1,78 @@
+:javascript
+  $(document).ready(function() {
+    /* Activating Best In Place */
+    jQuery(".best_in_place").best_in_place();
+  });
+.row
+  .span8
+    %h3 Search Alerts
+    %p
+      Search alerts notify you when a new document that you care about shows up. Track information like -
+      %em
+        = link_to 'building permits', 'documents/search?q=building+permits'
+      or
+      %em
+        = link_to 'construction projects', 'documents/search?q=construction+projects'
+      in your area, be notified when something happens on
+      %em your street
+      or follow a topic like
+      %em
+        = link_to 'medical marijuana.', 'documents/search?q=medical+marijuana'
+
+.row
+  .span8
+
+    %h3 Tips for your search alert
+    %blockquote
+      There are ways you can refine your search alert to get more specific results. If you are interested in a specific state add
+      %strong
+        %em municipality_state:VT
+      to search only in Vermont.
+      If you are only interested in your town try this:
+      %strong
+        %em municipality_slug:watertown-town-ma
+      which narrows your search alert to a specific town, in this case Watertown, MA.
+    %blockquote
+      Adding quote around a search means that we'll look for that exact phrase. So
+      %em 'building permits'
+      is different than
+      %em building permits.
+    %blockquote
+      If you are only interested in agendas for meetings that might mention your street you can use this:
+      %em 'Main Street municipality_slug:watertown-town-ma classification:agenda'
+
+.row
+  .span8
+    %h3 Add a new search alert
+    - unless current_user.nil?
+
+      = form_for(@alert, :html => { :class => "navbar-form form-search"} ) do |f|
+        .input-append
+          %input.input-xlarge.search-query{:placeholder => "Building Permits, Pensions, Budgets, Meetings, School Boards", :type => "text", :name => "search_alert[querystring]"}/
+          %button.btn.submit-button{:type => 'submit'} Add Alert
+
+        %br
+
+      %table.table
+        %thead
+          %th Created
+          %th Query
+        %tbody
+          - for alert in current_user.search_alerts.order("created_at desc")
+            %tr
+              %td
+                = time_ago_in_words alert.created_at
+                ago
+              %td
+                = best_in_place alert, :querystring, :type => :input
+              %td
+                .btn.pull-right= link_to "Delete",  {:action => "destroy", :id => alert.id}, :method => :delete, :confirm => "Are you sure"
+                .btn.pull-right= link_to "View", "/documents/search?q=#{alert.querystring}"
+      %h4 Note
+      %p Alerts will be sent to you automatically, as they show up, until you delete them
+
+    - else
+      .alert.alert-info.alert-block
+        %h3 Hey there!
+        Sorry, but Search Alerts are only available to registered users. Accounts are free and sign up only takes a minute.
+        .btn= link_to 'Create your free account', 'users/sign_up'

@@ -1,0 +1,80 @@
+:javascript
+  $(document).ready(function() {
+    /* Activating Best In Place */
+    jQuery(".best_in_place").best_in_place();
+  });
+.row
+  .span8
+    %h3
+      Municipal documents we've found in
+      = @state
+.row
+  .span8
+    .btn-toolbar
+      .btn-group
+        %a.btn.btn-small.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Filter by Type
+          .caret
+        %ul.dropdown-menu
+          - for type in Constants::CLASSIFICATIONS.sort
+            %li= link_to "#{type[1]}", state_documents_path(params.except(:controller, :action).merge(:classification => type[0]))
+          %li.divider
+          %li= link_to "All", state_documents_path
+      .btn-group
+        %a.btn.btn-small.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Filter by Organization
+          .caret
+        %ul.dropdown-menu
+          - for type in Constants::ORGANIZATIONS.sort
+            %li= link_to "#{type[1]}", state_documents_path(params.except(:controller, :action).merge(:organization => type[0]))
+          %li.divider
+          %li= link_to "All", documents_path
+      .btn-group
+        %a.btn.btn-small.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Sort by
+          .caret
+        %ul.dropdown-menu
+          %li= link_to "Relevant Date", state_documents_path(params.except(:controller, :action).merge(:state => @state, :sort_by => "likely_date"))
+          %li= link_to "Created Date", state_documents_path(params.except(:controller, :action).merge(:state => @state, :sort_by => "created_at"))
+          %li= link_to "Updated Date", state_documents_path(params.except(:controller, :action).merge(:state => @state, :sort_by => "updated_at"))
+
+%br
+
+- for document in @documents.order("likely_date desc nulls last")
+  .row
+    .span8
+      %h5
+        = link_to document.display_title, document_path(document.guid)
+      - if !document.extracted_text.nil? && !document.terms.nil?
+        %p
+          - for term in document.terms[0..10]
+            = "#{term[0].titlecase},"
+          = safe_squeeze(document.extracted_text.titlecase).split[0..70].join(" ")
+      - else
+        %p.small.muted We haven't yet extracted terms from this document.
+      %table.table.table-condensed
+        %tbody
+          %tr
+            %td.muted City
+            %td= link_to document.municipality.full_name, municipality_path(document.municipality)
+            %td.muted Relevant date
+            %td
+              = time_tag document.likely_date unless document.likely_date.nil?
+          %tr
+            %td.muted Org
+            %td= link_to document.legislative_body.humanize.titlecase, "/documents/search?q=#{document.legislative_body.humanize}"
+            %td.muted Found
+            %td= time_tag document.created_at
+          %tr
+            %td.muted Type
+            %td= link_to document.classification.humanize.titlecase, "/documents/search?q=#{document.classification.humanize}"
+            %td.muted Updated
+            %td= time_tag document.updated_at
+          %tr
+            %td{:colspan => 4}
+              %small
+                = link_to CGI::unescape(document.content_url.ellipsisize(100,50)), document.content_url
+      %br
+.row
+  .span8
+    = will_paginate @documents

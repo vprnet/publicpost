@@ -1,0 +1,33 @@
+# This is just an export of the environment variables configured on Heroku
+
+DATABASE_URL:                
+GEM_PATH:                    vendor/bundle/ruby/1.9.1
+HEROKU_APP:                  he-said-she-said
+HEROKU_PASS:                 
+HEROKU_POSTGRESQL_GREEN_URL: 
+HEROKU_USER:                 
+HSSS_ADMIN_USER_PASSWORD:    
+HSSS_CLASSIFIER_STORAGE_URL: 
+HSSS_ELASTIC_SEARCH_URL:            
+HSSS_S3_ACCESS_KEY_ID:       
+HSSS_S3_SECRET_ACCESS_KEY:   
+HSSS_SECRET_TOKEN:           
+HSSS_USA_TODAY_API_KEY:      
+JAVA_HOME:                   /usr/lib/jvm/java-6-openjdk
+LANG:                        en_US.UTF-8
+MAILGUN_API_KEY:             
+MAILGUN_SMTP_LOGIN:          
+MAILGUN_SMTP_PASSWORD:       
+MAILGUN_SMTP_PORT:           
+MAILGUN_SMTP_SERVER:         
+NEW_RELIC_APP_NAME:          
+NEW_RELIC_ID:                
+NEW_RELIC_LICENSE_KEY:       
+NEW_RELIC_LOG:               
+PATH:                        bin:vendor/bundle/ruby/1.9.1/bin:/usr/local/bin:/usr/bin:/bin
+PGBACKUPS_URL:               
+RACK_ENV:                    production
+RAILS_ENV:                   production
+REDISTOGO_URL:               
+SCHEDULER_URL:               
+TZ:                          Eastern Time (US & Canada)

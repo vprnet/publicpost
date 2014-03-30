@@ -1,0 +1,56 @@
+.row-fluid
+  .span12.pagination-centered
+    %br
+    %br
+    %h1 Search city and town documents
+    %form.navbar-form.form-search{:action => "/documents/search"}
+      .input-append
+        %input.input-xxlarge.search-query{:placeholder => "Like: Building Permits, Pensions, Budgets, Meetings, School Boards", :type => "text", :name => "q"}/
+        %button.btn{:type => "submit"} Search
+
+  .span12
+    %br
+    %br
+    %br
+
+.row-fluid
+  .span4
+    %h3 Perform Research
+    .well
+      %p
+        Research
+        = link_to 'leash law ordinances,', '/documents/search?q=leash+law'
+        = link_to 'post employement benefit plans,', '/documents/search?q=pension'
+        (OPEB),
+        = link_to 'energy savings', '/documents/search?q=energy+savings'
+        (ESCO) and other legislative documents like
+        = link_to 'Select Board', '/documents/search?q=select+board'
+        and
+        = link_to 'City Council', '/documents/search?q=city+council'
+        = link_to 'meeting minutes,', '/documents/search?q=meeting+minutes'
+        = link_to 'agendas,', '/documents/search?q=agenda'
+        = link_to 'crime reports.', '/documents/search?q="crime"'
+  .span4
+    %h3 Stay Informed
+    .well
+      %p
+        Stay informed about timely, relevant information in local government.
+        = link_to 'Create a FREE search alert', "/search_alerts"
+        for a specific city or state. Monitor
+        = link_to 'new paving projects', '/documents/search?q=paving+project'
+        changes to
+        = link_to 'ordinances', '/documents/search?q=ordinances'
+        and
+        = link_to 'capital improvement projects.', '/documents/search?q=capital+improvement'
+  .span4
+    %h3 New Business
+    .well
+      %p
+        Find new business opportunities by looking at
+        =link_to 'Request for Proposals,', '/documents/search?q=request+for+proposal'
+        new
+        =link_to 'fuel contracts,', '/documents/search?q=fuel+contracts'
+        or learning about the status of
+        =link_to 'police cruisers.', '/documents/search?q=police+cruisers'
+        Our tools can help you find new customers in hundres of cities and towns.
+

@@ -1,0 +1,59 @@
+@import "bootstrap";
+
+/* http://stackoverflow.com/questions/10185384/twitter-bootstrap-responsive-navbar-broken-on-small-screens */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+@import "bootstrap-responsive";
+
+/* mixins, variables, etc. */
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* universal */
+
+html {
+  overflow-y: scroll;
+}
+
+section {
+  overflow: auto;
+}
+
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+/* footer */
+
+/* debug */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
+/* buttons */
+
+.btn-comment {
+  float: right;
+  margin-top: -10px;
+}
+
+/* miscellaneous */
+
+.caps {
+  font-weight: bold;
+}

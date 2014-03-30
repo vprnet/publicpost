@@ -1,0 +1,26 @@
+%row
+  .span12
+    %h3 User audit trail: Documents edited by this user
+  .span12
+    %table.table.table-condensed.table-striped
+      %tbody
+        %thead
+          %tr
+            %th Municipality
+            %th Organization
+            %th Type
+            %th Document
+            %th Updated at
+            %th Change
+        - for d in @docs_edited.order("created_at desc")
+          %tr
+            %td= link_to d.reify.municipality.slug, municipality_path(d.reify.municipality.slug)
+            %td= d.reify.legislative_body.humanize.titlecase unless d.reify.legislative_body.nil?
+            %td= d.reify.classification.humanize.titlecase unless d.reify.classification.nil?
+            %td= link_to d.reify.guid, document_path(d.reify.guid)
+            %td= time_tag d.reify.updated_at
+            %td
+              = d.changeset
+  .span12
+    = will_paginate @docs_edited
+

@@ -1,0 +1,20 @@
+%header.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      = link_to('Municipal Docs', root_path, class: 'brand')
+      %nav
+        %ul.nav
+          = nav_link_to('Documents', documents_path, false)
+          = nav_link_to('Cities', municipalities_path, false)
+          = nav_link_to('Alerts', search_alerts_path, false)
+          %li
+            - if current_user.nil?
+              = link_to 'Sign in', '/users/sign_in'
+            - else
+              = link_to "#{current_user.email} (Sign out)", '/users/sign_out', :method => :delete
+      - if display_search_box?
+        %form.navbar-form.pull-right.form-search{:action => "/documents/search"}
+          .input-append
+            %input.search-query{:placeholder => "Building Permits, Pensions, Budgets, Meetings, School Boards", :type => "text", :name => "q"}/
+            %button.btn{:type => "submit"} Search
+

@@ -1,0 +1,102 @@
+- content_for :title do
+  = "#{@document.display_title} - #{@document.municipality.full_name}"
+:javascript
+  $(document).ready(function() {
+    /* Activating Best In Place */
+    jQuery(".best_in_place").best_in_place();
+  });
+.row
+  .span8
+    .pagination-centered
+      %h3
+        - if current_user
+          = best_in_place @document, :legislative_body, :type => :select, :collection => @document.display_organizations, :nil => "Click me to add the organization"
+        - elsif !@document.legislative_body.nil?
+          = @document.legislative_body.humanize.titleize
+
+        |
+        - if current_user
+          = best_in_place @document, :classification, :type => :select, :collection => @document.display_classifications, :nil => "Click to change the type"
+        - elsif !@document.classification.nil?
+          = @document.classification.humanize.titleize
+
+      %h3
+        %strong
+        - if current_user
+          = best_in_place @document, :likely_date, :display_as => :display_date, :type => :input, :nil => "Click to add a relevant date"
+        - else
+          - if @document.likely_date.nil?
+            No date found
+          - else
+            = time_tag @document.likely_date
+      %h3
+        = link_to @document.municipality.full_name, municipality_path(@document.municipality)
+
+
+    %blockquote
+      %p= @document.extracted_text.split(" ")[0..50].join(" ") unless @document.extracted_text.nil?
+      %small
+        = link_to "#{CGI::unescape(@document.content_url)}", @document.content_url
+    %br
+
+    %h4
+      Full Text
+    %p
+      = raw markdown(@document.extracted_text) unless @document.extracted_text.nil?
+    %hr
+
+    %h4
+      Original Document
+      = "(#{@document.content_type})"
+
+    %div{:class => "modal hide fade", :tabindex => "-1", :role => "dialog", :id => "myModal", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+      .modal-header
+        %button{:type => "button", :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true"}
+          ×
+        %h3#myModalLabel
+          Modal header
+      .modal-body
+        %p One fine body
+      .modal-footer
+        %button{:type => "button", :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true"}
+        %button{:class =>"btn", "data-dismiss" => "modal", "aria-hidden" => "true"}
+          Close
+        %button{:class => "btn btn-primary"}
+          Save changes
+
+    %iframe{:src => "#{@document.content_url}", :width => "100%", :height => "600"}
+
+  .span3.offset1
+    %h4 People mentioned
+    - unless @document.people.blank?
+      %ul
+        - for person in @document.people.sort
+          %li= link_to "#{person.gsub(/\+/, " ")}", :controller => :documents, :action => :search, :q => person
+    %hr
+
+    %h4 Organizations mentioned
+    - unless @document.organizations.nil?
+      %ul
+      - for company in @document.organizations.sort
+        %li= link_to "#{company.gsub(/\+/, " ")}", :controller => :documents, :action => :search, :q => company
+    %hr
+
+    %h4 Locations mentioned
+    - unless @document.locations.nil?
+      %ul
+      - for location in @document.locations.sort
+        %li= link_to "#{location.gsub(/\+/, " ")}", :controller => :documents, :action => :search, :q => location
+    %hr
+
+    %h4 Phone Numbers
+    - unless @document.phone_numbers.nil?
+      %ul
+      - for number in @document.phone_numbers
+        %li= link_to number, "tel:#{number}"
+    %hr
+
+    %h4 Terms
+    - unless @document.terms.nil?
+      %ul
+      - for term in @document.terms
+        %li= link_to "#{term[0].gsub(/\+/, " ")} (#{term[1]})", :controller => :documents, :action => :search, :q => term[0]

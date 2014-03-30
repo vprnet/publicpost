@@ -1,0 +1,25 @@
+.row
+  .span12
+    %p.lead Below are the most mentioned Organizations, People and Companies in the documents we've found.
+.row
+  .span4
+    %h1 Top 50 Organizations
+    %ul
+    - for org in @organizations
+      %li
+        = link_to org[0].downcase.titleize, :controller => :documents, :action => :search, :q => org[0].downcase
+        = "(#{org[1]})"
+  .span4
+    %h1 Top 50 People
+    %ul
+    - for person in @people
+      %li
+        = link_to person[0].downcase.titleize, :controller => :entities, :action => :show, :id => person[0].downcase.gsub(' ', '-')
+        = "(#{person[1]})"
+  .span4
+    %h1 Top 50 Companies
+    %ul
+    - for company in @companies
+      %li
+        = link_to company[0].downcase.titleize, :controller => :entities, :action => :show, :id => company[0].downcase.gsub(' ', '-')
+        = "(#{person[1]})"

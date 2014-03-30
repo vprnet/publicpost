@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>API :: v1</title>
+    <link href="/assets/application.css?body=1" media="all" rel="stylesheet" type="text/css" />
+    <link href="/assets/custom.css?body=1" media="all" rel="stylesheet" type="text/css" />
+    <link href="/assets/documents.css?body=1" media="all" rel="stylesheet" type="text/css" />
+        <script src="/assets/jquery.js?body=1" type="text/javascript"></script>
+    <script src="/assets/jquery_ujs.js?body=1" type="text/javascript"></script>
+    <script src="/assets/bootstrap-transition.js?body=1" type="text/javascript"></script>
+    <script src="/assets/bootstrap-alert.js?body=1" type="text/javascript"></script>
+    <script src="/assets/bootstrap-button.js?body=1" type="text/javascript"></script>
+    <script src="/assets/bootstrap-carousel.js?body=1" type="text/javascript"></script>
+    <script src="/assets/bootstrap-collapse.js?body=1" type="text/javascript"></script>
+    <script src="/assets/bootstrap-dropdown.js?body=1" type="text/javascript"></script>
+    <script src="/assets/bootstrap-modal.js?body=1" type="text/javascript"></script>
+    <script src="/assets/bootstrap-scrollspy.js?body=1" type="text/javascript"></script>
+    <script src="/assets/bootstrap-tab.js?body=1" type="text/javascript"></script>
+    <script src="/assets/bootstrap-tooltip.js?body=1" type="text/javascript"></script>
+    <script src="/assets/bootstrap-popover.js?body=1" type="text/javascript"></script>
+    <script src="/assets/bootstrap-typeahead.js?body=1" type="text/javascript"></script>
+    <script src="/assets/bootstrap.js?body=1" type="text/javascript"></script>
+    <script src="/assets/documents.js?body=1" type="text/javascript"></script>
+    <script src="/assets/masonry.js?body=1" type="text/javascript"></script>
+    <script src="/assets/application.js?body=1" type="text/javascript"></script>
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-9947020-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+  </head>
+  <body>
+    <header class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a href="/" class="brand">API :: v1</a>
+          <nav>
+            <ul class="nav">
+              <li class="active"><a href="/">Home</a></li>
+              <li><a href="/municipalities">Cities &amp; Towns</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+
+      <div class="center hero-unit">
+        <h1 class="center">API</h1>
+        <p>API access to documents collected from Municipalities (city and town) websites.</p>        
+      </div>
+
+      <div class="row">
+        <div class="span12">
+
+          <section id="rest-resources">
+            <h1>API</h1>
+            <ul>
+              <li><a href="#municipalities">Municipalities</a></li>
+              <li><a href="#municipality">Municipality</a></li>
+              <li><a href="#documents">Documents</a></li>
+              <li><a href="#document">Document</a></li>
+              <li><a href="#classifications">Document :: Classifications</a></li>
+              <li><a href="#legislative_bodies">Document :: Legislative Bodies</a></li>
+              <li><a href="#content_types">Document :: Content Types</a></li>
+            </ul>
+          </section>
+          <section>
+            <h1>Other details</h1>
+            <ul>
+              <li><a href="#authentication">Authentication</a></li>
+              <li><a href="#response-format">Response format</a></li>
+              <li><a href="#paging">Paging Information</a></li>
+            </ul>
+          </section>
+
+<br/>
+<br/>
+
+          <hr/>
+<br/>
+<br/>
+
+         <section id="resource-municipalities">
+            <h1><a name="municipalities">Resource :: Municipalities</a></h1>
+            <p class="well">Returns a list of Municipalities (Cities and Towns) given the provided parameters. The results can be paged and are sorted by full_name ascending.</p>
+
+            <h3>Authentication</h3>
+            <p>GET requests do not require authentication beyond your API key</p>
+
+            <h3>Arguments</h3>
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Required</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>api_key</td>
+                  <td>Optional</td>
+                  <td>An API key is not currently required but you will not be notified of changes to the API and we will soon require one.</td>
+                </tr>
+                <tr>
+                  <td>state</td>
+                  <td>Optional</td>
+                  <td>The two character code for a state like: state=VT or state=ME</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Resource URI</h3>
+            <pre>GET <a href="http://api/v1/municipalities?state=vt&per_page=2">http://api/v1/municipalities?state=vt&per_page=2</a></pre>
+
+<br/>
+<br/>
+
+          <hr/>
+<br/>
+<br/>
+
+         <section id="resource-municipality">
+            <h1><a name="municipality">Resource :: Municipality</a></h1>
+            <p class="well">Returns a Municipality (City or Town) given the provided parameters.</p>
+
+            <h3>Authentication</h3>
+            <p>GET requests do not require authentication beyond your API key</p>
+
+            <h3>Arguments</h3>
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Required</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>api_key</td>
+                  <td>Optional</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Resource URI</h3>
+            <pre>GET <a href="http://api/v1/municipalities/barre-vt">http://api/v1/municipalities/barre-vt</a></pre>
+
+<br/>
+<br/>
+
+          <hr/>
+<br/>
+<br/>
+
+
+          <section id="resource-documents">
+            <h1><a name="documents">Resource :: Documents</a></h1>
+            <p class="well">Returns a list of documents (PDF, HTML, Word, etc.) given the provided parameters. The documents can be paged and are sorted by created_at with most-recently found documents first.</p>
+
+            <h3>Authentication</h3>
+            <p>GET requests do not require authentication beyond your API key</p>
+
+            <h3>Arguments</h3>
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Required</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>api_key</td>
+                  <td>Optional</td>
+                </tr>
+                <tr>
+                  <td>state</td>
+                  <td>Optional</td>
+                  <td>The two character code for a state like: state=VT or state=ME</td>
+                </tr>
+                <tr>
+                  <td>municipality_slug</td>
+                  <td>Optional</td>
+                  <td>The municipality slug for a city or town, like: municipality_slug=millinocket-me or municipality_slug=watertown-town-ma. Use /api/v1/municipalities to get the full list.</td>
+                </tr>
+                <tr>
+                  <td>created_after</td>
+                  <td>Optional</td>
+                  <td>Returns documents after a given DateTime. For example: created_after=2012-06-07T18:54:22-04:00 or created_after=2012-06-07. When combined with created_before can be used to restrict documents to a range.</td>
+                </tr>                
+                <tr>
+                  <td>created_before</td>
+                  <td>Optional</td>
+                  <td>Returns documents before a given DateTime. For example: created_before=2012-06-07T18:54:22-04:00 or created_before=2012-06-07. When combined with created_after can be used to restrict documents to a range.</td>
+                </tr> 
+                <tr>
+                  <td>content_type</td>
+                  <td>Optional</td>
+                  <td>Given a single MIME-Type like content_type=text/html or content_type=application/pdf. Returns documents of that type.</td>
+                </tr>
+                <tr>
+                  <td>classification</td>
+                  <td>Optional</td>
+                  <td>Given a single classification type: 'unkown', 'agenda', 'ballot', 'bid', 'budget', 'charter', 'debt_authorization', 'grievance_procedure', 'minutes', 'notice', 'ordinance', 'permit', 'plan', 'public_hearing', 'report', 'schedule', 'zoning_map'. Returns documents with that classification.</td>
+                </tr>
+                <tr>
+                  <td>legislative_body</td>
+                  <td>Optional</td>
+                  <td>Given a single legislative_body type: 'unknown', 'board_of_selectmen', 'council_on_aging', 'parks_comission', 'planning_board', 'planning_comission', 'school_board', 'town_council', 'zoning_board'. Returns documents from that legislative body.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Resource URI</h3>
+            <pre>GET <a href="http://api/v1/documents?classification=minutes&created_after=2012-06-07T18:54:22-04:00&page=2&state=vt&per_page=10">http://api/v1/documents?classification=minutes&created_after=2012-06-07T18:54:22-04:00&page=2&state=vt&per_page=10</a></pre>
+
+            <h3>Response fields</h3>
+<pre>
+    property :total_entries
+    property :per_page
+
+    link :self
+    link :next - shortcut to the next page of results
+    link :previous - shortcut to the previous page of results
+
+    collection :documents
+      
+      property :guid
+
+      link :self
+      link :municipality
+      
+      property :municipality_name
+      property :municipality_state
+
+      property :content_url - link to the original document
+
+      property :created_at - the date we found the document
+      property :updated_at - date if we modify the document metadata
+      property :last_modified - as set by the municipality web server
+      property :content_type - MIME/TYPE
+
+      # Calcualted fields
+      property :likely_date - our calculated guess at the likely relevant date
+      property :classification - our calcualted guess at classification
+      property :legislative_body - our calculated guess at legislative body
+      property :status - our calculated guess at the document status like DRAFT or FINAL
+
+      property :title - extracted from the document
+      property :summary - calculated from the document text
+
+      # Entities extracted from the document text by OpenCalais
+      property :topics
+</pre>            
+
+
+            <h3>Response example</h3>
+  <pre>
+{
+   "total_entries":7552,
+   "per_page":10,
+   "links":[
+      {
+         "rel":"self",
+         "href":"http://api/v1/documents?classification=minutes&created_after=2012-06-07T18%3A54%3A22-04%3A00&page=2&per_page=10&state=vt"
+      },
+      {
+         "rel":"next",
+         "href":"http://api/v1/documents?classification=minutes&created_after=2012-06-07T18%3A54%3A22-04%3A00&page=3&per_page=10&state=vt"
+      },
+      {
+         "rel":"previous",
+         "href":"http://api/v1/documents?classification=minutes&created_after=2012-06-07T18%3A54%3A22-04%3A00&page=1&per_page=10&state=vt"
+      }
+   ],
+   "documents":[
+      {
+         "guid":"82b1e396902f3c6822b22843bb542ffa",
+         "links":[
+            {
+               "rel":"self",
+               "href":"http://api/v1/documents/82b1e396902f3c6822b22843bb542ffa"
+            },
+            {
+               "rel":"municipality",
+               "href":"http://api/v1/municipalities/barnet-vt"
+            }
+         ],
+         "municipality_name":"Barnet",
+         "municipality_state":"VT",
+         "content_url":"http://www.kevaco.com/BarnetVT/schoolboardminutes.php",
+         "created_at":"2012-07-08T18:54:09-04:00",
+         "updated_at":"2012-07-08T18:57:35-04:00",
+         "content_type":"text/html",
+         "classification":"minutes",
+         "legislative_body":"school_board",
+         "summary":"Minutes - Barnet School Board of Directors' Meetings The links below provide access to PDF files. Adobe Reader is required to view these files. If you do not have Adobe Reader it can be downloaded for free at: http://get.adobe.com/reader/ Index Below is a link to an index of meeting minute topi",
+         "topics":[
+
+         ]
+      },
+      {
+         "guid":"e24e14a60d31c97df6212c726bd4cf20",
+         "links":[
+            {
+               "rel":"self",
+               "href":"http://api/v1/documents/e24e14a60d31c97df6212c726bd4cf20"
+            },
+            {
+               "rel":"municipality",
+               "href":"http://api/v1/municipalities/barnet-vt"
+            }
+         ],
+         "municipality_name":"Barnet",
+         "municipality_state":"VT",
+         "content_url":"http://www.barnetvt.org/sbminsarchive.php",
+         "created_at":"2012-07-08T18:54:08-04:00",
+         "updated_at":"2012-07-08T18:57:31-04:00",
+         "content_type":"text/html",
+         "classification":"minutes",
+         "legislative_body":"unknown",
+         "summary":"ARCHIVE OF MINUTES 2010 2009 2008 2007 2006",
+         "topics":[
+
+         ]
+      },
+      {
+         "guid":"dce3519497d685c4da0fc95d086dd45f",
+         "links":[
+            {
+               "rel":"self",
+               "href":"http://api/v1/documents/dce3519497d685c4da0fc95d086dd45f"
+            },
+            {
+               "rel":"municipality",
+               "href":"http://api/v1/municipalities/barnet-vt"
+            }
+         ],
+         "municipality_name":"Barnet",
+         "municipality_state":"VT",
+         "content_url":"http://www.barnetvt.org/PDF/up/2010.01.11.SelectboardMinutes.approved.pdf",
+         "created_at":"2012-07-08T18:54:07-04:00",
+         "updated_at":"2012-07-08T18:57:39-04:00",
+         "last_modified":"2010-05-04",
+         "content_type":"application/pdf",
+         "likely_date":"2010-01-11",
+         "classification":"minutes",
+         "legislative_body":"board_of_selectmen",
+         "summary":"MINUTES- SELECTMEN\u2019S MEETING TOWN OF BARNET, VT MONDAY, JANUARY 11, 2010 Meeting convened at 7:00 p.m. in the conference room of the Barnet Town Clerk\u2019s Office. Board members present: Selectmen Theodore Faris, Jeremy Roberts, and Gary Bunnell. Others present: Town Clerk Ben",
+         "topics":[
+            {
+               "commonname":null,
+               "created_at":"2012-07-08T18:57:37-04:00",
+               "document_id":91618,
+               "guid":"http://d.opencalais.com/genericHasher-1/a6891a11-31d8-3b24-ae57-d5efe6a1de6c",
+               "id":876948,
+               "kind":"IndustryTerm",
+               "name":"potential products",
+               "nationality":null,
+               "organization_kind":null,
+               "person_kind":null,
+               "reference_type":"http://s.opencalais.com/1/type/em/e/IndustryTerm",
+               "updated_at":"2012-07-08T18:57:37-04:00"
+            },
+            {
+               "commonname":null,
+               "created_at":"2012-07-08T18:57:34-04:00",
+               "document_id":91618,
+               "guid":"http://d.opencalais.com/genericHasher-1/bb902269-f769-3a6d-b9df-b87bb12ff77e",
+               "id":876904,
+               "kind":"IndustryTerm",
+               "name":"residence site",
+               "nationality":null,
+               "organization_kind":null,
+               "person_kind":null,
+               "reference_type":"http://s.opencalais.com/1/type/em/e/IndustryTerm",
+               "updated_at":"2012-07-08T18:57:34-04:00"
+            },
+            {
+               "commonname":null,
+               "created_at":"2012-07-08T18:57:32-04:00",
+               "document_id":91618,
+               "guid":"http://d.opencalais.com/genericHasher-1/62360d9f-27d9-3b63-ac05-bd3ae76a709d",
+               "id":876873,
+               "kind":"IndustryTerm",
+               "name":"oil underground storage \ntank",
+               "nationality":null,
+               "organization_kind":null,
+               "person_kind":null,
+               "reference_type":"http://s.opencalais.com/1/type/em/e/IndustryTerm",
+               "updated_at":"2012-07-08T18:57:32-04:00"
+            }
+         ]
+      },
+      ...
+     ]
+  }
+  </pre>
+          </section>
+
+<br/>
+<br/>
+
+          <hr/>
+<br/>
+<br/>
+
+          <h1><a name="document">Resource :: Document</a></h1>
+          <p class="well">Returns the requested document given the provided parameters.</p>
+
+          <h3>Authentication</h3>
+          <p>GET requests do not require authentication beyond your API key</p>
+
+          <h3>Arguments</h3>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Required</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>api_key</td>
+                <td>Optional</td>
+                <td>An API key is not currently required.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Resource URI</h3>
+          <pre>GET <a href="http://api/v1/documents/911f5ed86ca9a1235a3c0679ad1ab37c">http://api/v1/documents/911f5ed86ca9a1235a3c0679ad1ab37c</a></pre>
+
+          <h3>Response</h3>
+<pre>
+{
+   "guid":"911f5ed86ca9a1235a3c0679ad1ab37c",
+   "links":[
+      {
+         "rel":"self",
+         "href":"http://api/v1/documents/911f5ed86ca9a1235a3c0679ad1ab37c"
+      },
+      {
+         "rel":"municipality",
+         "href":"http://api/v1/municipalities/barnet-vt"
+      }
+   ],
+   "municipality_name":"Barnet",
+   "municipality_state":"VT",
+   "content_url":"http://www.barnetvt.org/PDF/up/2010.01.21.SelectboardMinutes.approved.pdf",
+   "created_at":"2012-07-08T18:54:05-04:00",
+   "updated_at":"2012-07-08T18:57:32-04:00",
+   "last_modified":"2010-05-04",
+   "content_type":"application/pdf",
+   "likely_date":"2010-01-21",
+   "classification":"minutes",
+   "legislative_body":"board_of_selectmen",
+   "summary":"MINUTES SPECIAL SELECTMEN\u2019S MEETING TOWN OF BARNET, VT. THURSDAY, JANUARY 21, 2010 Board members present: Selectmen Theodore Faris, Jeremy Roberts, and Gary Bunnell. Others present: Road Foreman Timothy Gibbs, Thomas Gould, and Cristina Rousseau. Recorder of minutes: Theodore Faris Mee",
+   "topics":[
+
+   ]
+}
+</pre>
+
+<br/>
+<br/>
+          <hr/>
+<br/>
+<br/>
+
+          <h1><a name="classifications">Document :: Classifications</a></h1>
+          <h3>Document Classficiations</h3>
+          <p>We examine documents to try and determine their type. You could use the classification field to narrow down the document types that you are interested in.</p>
+          <pre>
+curl -X GET -H 'Authorization: Token token="your api key here"' http://api/v1/documents/classifications</pre>
+          <pre>
+Example response:
+[
+   {
+      "classification":"agenda"
+   },
+   {
+      "classification":"bid"
+   },
+   {
+      "classification":"charter"
+   },
+   {
+      "classification":"debt_authorization"
+   },
+   {
+      "classification":"grievance_procedure"
+   },
+   {
+      "classification":"minutes"
+   },
+   {
+      "classification":"notice"
+   },
+   {
+      "classification":"ordinance"
+   },
+   {
+      "classification":"permit"
+   },
+   {
+      "classification":"plan"
+   },
+   {
+      "classification":"public_hearing"
+   },
+   {
+      "classification":"report"
+   },
+   {
+      "classification":"schedule"
+   },
+   {
+      "classification":"unclassified"
+   },
+   {
+      "classification":"zoning_map"
+   }
+]
+          </pre>
+
+<br/>
+<br/>
+          <hr/>
+<br/>
+<br/>
+
+          <h1><a name="legislative_bodies">Document :: Legislative Bodies</a></h1>
+          <h3>Legislative Bodies</h3>
+          <p>The legislative body responsible for the document. Town Council, Board of Selectmen, Planning Commission, etc.</p>
+          <pre>
+curl -X GET -H 'Authorization: Token token="your api key here"' http://api/v1/documents/legislative_bodies</pre>
+          <pre>
+Example response:
+[
+   {
+      "legislative_body":"board_of_selectmen"
+   },
+   {
+      "legislative_body":"council_on_aging"
+   },
+   {
+      "legislative_body":"planning_board"
+   },
+   {
+      "legislative_body":"planning_commission"
+   },
+   {
+      "legislative_body":"school_board"
+   },
+   {
+      "legislative_body":"town_council"
+   },
+   {
+      "legislative_body":"unknown"
+   },
+   {
+      "legislative_body":"zoning_board"
+   }
+]
+          </pre>
+
+<br/>
+<br/>
+          <hr/>
+<br/>
+<br/>
+
+          <h1><a name="content_types">Document :: Content Types</a></h1>
+          <h3>Content Types</h3>
+          <p>The mime_type of the document. Useful for narrowing down to PDF, Word, HTML, etc.</p>
+          <pre>
+curl -X GET -H 'Authorization: Token token="your api key here"' http://api/v1/documents/content_types</pre>
+          <pre>
+Example response:
+[
+   {
+      "content_type":"application/msword"
+   },
+   {
+      "content_type":"application/pdf"
+   },
+   {
+      "content_type":"text/html"
+   },
+   {
+      "content_type":"text/xml"
+   }
+]
+          </pre>
+
+<br/>
+<br/>
+          <hr/>
+<br/>
+<br/>
+
+          <h1><a name="authentication">Authentication</a></h1>
+          <h3>HTTP Header</h3>
+          <p>Accessing the API requires that an HTTP header be added to all requests. That looks like this with curl.</p>
+          <pre>curl -X GET -H 'Authorization: Token token="your api key here"' http://api/v1/documents</pre>
+
+<br/>
+<br/>
+
+          <h1><a name="response-format">Resource Response Formats</a></h1>
+          <h3>JSON</h3>
+          <p>APIs return resource representations as JSON with hypermedia links to other useful resources.</p>
+
+<br/>
+<br/>
+          <hr/>
+<br/>
+<br/>
+
+
+          <h1><a name="paging">Paging Information</a></h1>
+          <p>All resources in list format are paged.</p>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Required</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>page</td>
+                <td>Optional</td>
+                <td>The current page number. The first page is 1.</td>
+              </tr>
+              <tr>
+                <td>per_page</td>
+                <td>Optional</td>
+                <td>The number of documents per page. Default is 30. Max is 100.</td>
+              </tr>
+            </tbody>
+          </table>
+</pre>
+
+        </div>
+      </div>
+
+      <footer class="footer">
+      </footer>
+
+    </div>
+  </body>
+</html>

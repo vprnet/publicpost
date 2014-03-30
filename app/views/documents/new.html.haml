@@ -1,0 +1,16 @@
+.row
+  .span12
+    %h1 Add a new document
+.row
+  .span4
+    %h3 Option 1: Provide a URL
+    = form_for @document do |f|
+      = f.label "URL for the document"
+      = f.text_field :content_url
+      = f.submit
+  .span4
+    %h3 Option 2: Upload a document
+    = form_for @document do |f|
+      = f.label "URL for the document"
+      = f.text_field :content_url
+      = f.submit

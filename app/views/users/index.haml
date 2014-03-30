@@ -1,0 +1,17 @@
+%row
+  .span12
+    %h3 Users
+    %table.table.table-striped
+      %thead
+        %tr
+          %th User
+          %th Created
+          %th Last sign in
+          %th Current IP
+      %tbody
+        - for user in @users
+          %tr
+            %td= link_to "User: #{user.id}", user_path(user)
+            %td= user.created_at
+            %td= user.last_sign_in_at
+            %td= user.current_sign_in_ip
