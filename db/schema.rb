@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130209175216) do
+ActiveRecord::Schema.define(:version => 20130210155003) do
 
   create_table "api_keys", :force => true do |t|
     t.string   "access_token"
@@ -42,6 +42,10 @@ ActiveRecord::Schema.define(:version => 20130209175216) do
     t.datetime "updated_at",                      :null => false
     t.datetime "deleted_at"
     t.boolean  "useful"
+    t.text     "people"
+    t.text     "locations"
+    t.text     "organizations"
+    t.text     "terms"
   end
 
   add_index "documents", ["classification"], :name => "index_documents_on_classification"
