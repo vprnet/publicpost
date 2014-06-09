@@ -5,10 +5,10 @@ Encoding.default_internal = 'UTF-8'
 
 # Application constants
 module Constants
-  OPEN_CALAIS_API_KEY = ENV["HSSS_OPEN_CALAIS_API_KEY"]
-  USA_TODAY_API_KEY = ENV["HSSS_USA_TODAY_API_KEY"]
-  S3_ACCESS_KEY_ID     = ENV["HSSS_S3_ACCESS_KEY_ID"]
-  S3_SECRET_ACCESS_KEY = ENV["HSSS_S3_SECRET_ACCESS_KEY"]
+  OPEN_CALAIS_API_KEY   = ENV["HSSS_OPEN_CALAIS_API_KEY"]
+  USA_TODAY_API_KEY     = ENV["HSSS_USA_TODAY_API_KEY"]
+  S3_ACCESS_KEY_ID      = ENV["HSSS_S3_ACCESS_KEY_ID"]
+  S3_SECRET_ACCESS_KEY  = ENV["HSSS_S3_SECRET_ACCESS_KEY"]
 
   MAILGUN_URL     = ENV["MAILGUN_URL"]
   MAILGUN_API_KEY = ENV["MAILGUN_API_KEY"]
@@ -17,8 +17,9 @@ module Constants
   DEFAULT_YOMU_TIMEOUT = 60
 
   TEXT_SUMMARIZER_URL = 'FILL_ME_IN'
-  TEXT_EXTRACTOR_URLS = %w(FILL_ME_IN FILL_ME_IN)
-  TEXT_ENTITIES_URL   = 'FILL_ME_IN'
+
+  TEXT_EXTRACTOR_URLS = (1..5).map { |i| "http://publicpost-text-extractor-#{i}.herokuapp.com" }
+  TEXT_ENTITIES_URL   = 'http://publicpost-text-entities-1.herokuapp.com'
 
   ANEMONE_USER_AGENT       = 'Googlebot'
   ANEMONE_DELAY            = 1 #seconds

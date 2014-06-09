@@ -2,8 +2,8 @@ HeSaidSheSaid::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   module Constants
-    S3_BUCKET_NAME      = 'FILL_ME_IN'
-    ELASTIC_SEARCH_URL  =  ENV["HSSS_ELASTIC_SEARCH_URL"]
+    S3_BUCKET_NAME      = ENV["HSSS_S3_BUCKET_NAME"]
+    ELASTIC_SEARCH_URL  = ENV["HSSS_ELASTIC_SEARCH_URL"]
     TEXT_CLASSIFIER_URL = 'http://text-classifier.herokuapp.com'
   end
 
@@ -11,8 +11,8 @@ HeSaidSheSaid::Application.configure do
       url Constants::ELASTIC_SEARCH_URL
   end
 
-  config.action_mailer.default_url_options = { :host => 'FILL_ME_IN' }
-  config.representer.default_url_options = {:host => 'FILL_ME_IN'}
+  config.action_mailer.default_url_options = { :host => ENV["HSSS_MAILER_HOST"] }
+  config.representer.default_url_options = { :host => ENV["HSSS_MAILER_HOST"] }
 
   ActionMailer::Base.smtp_settings = {
     :port           => ENV['MAILGUN_SMTP_PORT'],
@@ -74,7 +74,7 @@ HeSaidSheSaid::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { :host => 'FILL_ME_IN' }
+  # config.action_mailer.default_url_options = { :host => 'FILL_ME_IN' }
 
   # Enable threaded mode
   # config.threadsafe!
