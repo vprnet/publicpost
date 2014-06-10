@@ -16,7 +16,7 @@ module Constants
   DEFAULT_HTTP_TIMEOUT = 10
   DEFAULT_YOMU_TIMEOUT = 60
 
-  TEXT_SUMMARIZER_URL = 'FILL_ME_IN'
+  TEXT_SUMMARIZER_URL = 'http://publicpost-text-summarize-1.herokuapp.com'
 
   TEXT_EXTRACTOR_URLS = (1..5).map { |i| "http://publicpost-text-extractor-#{i}.herokuapp.com" }
   TEXT_ENTITIES_URL   = 'http://publicpost-text-entities-1.herokuapp.com'
