@@ -66,6 +66,11 @@ class Document < ActiveRecord::Base
   def to_indexed_json
     # TODO:
     # Probably don't want to use this here but not sure how to get around that yet.
+
+    # Used to index from command line w/
+    # rake tire:import CLASS=Document
+    require "app/representers/V1/document_representer"
+
     document = self.extend(V1::DocumentRepresenter)
     return document.to_json
   end
