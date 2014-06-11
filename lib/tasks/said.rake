@@ -4,6 +4,15 @@ require 'open-uri'
 require 'set'
 
 namespace :said do
+  # heroku run said:copy_documents_hsss_persisted_url_to_persisted_url
+  desc 'copy document from hsss_persisted_url original S3 bucket to new persisted_url S3 bucket'
+  task :copy_documents_hsss_persisted_url_to_persisted_url do
+    Document.where("persisted_url is not null").find_in_batches do |group|
+      group.each do |document|
+        UploadDocumentFromHsssS3Bucket.perform_async(document.id, nil)
+      end
+    end
+  end
 
   desc 'Update document entities.'
   task update_document_entities: :environment do

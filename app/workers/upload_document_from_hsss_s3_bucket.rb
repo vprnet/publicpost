@@ -1,21 +1,18 @@
-# Job that uploads a Document to S3.
-class UploadDocument < Worker
+# This worker copies the document at hsss_persisted_url (renamed in migration) to a new S3 bucket at persisted_url
+class UploadDocumentFromHsssS3Bucket < Worker
 
   sidekiq_options queue: "low"
   sidekiq_options :retry => 1
 
-  # Task implementation.
-  #
-  # @param arg Argument used by the task
-  def run(arg)
-    document = Document.unscoped.find(arg)
+  def run(document_id)
+    document = Document.unscoped.find(document_id)
 
     # Calculate a unique key for the Document
     municipality = document.municipality
     key = "#{municipality.state.downcase}/#{municipality.name.downcase}/#{document.guid}"
 
-    # Download the Document
-    response = @@http_client.get(document.content_url, :follow_redirect => true)
+    # Download the Document from renamed hsss_persisted_url S3 bucket
+    response = @@http_client.get(document.hsss_persisted_url, :follow_redirect => true)
     if response.ok?
       # Upload the Document
       bucket = configure_s3_bucket
