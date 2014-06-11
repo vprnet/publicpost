@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130210155003) do
+ActiveRecord::Schema.define(:version => 20140611145802) do
 
   create_table "api_keys", :force => true do |t|
     t.string   "access_token"
@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(:version => 20130210155003) do
   create_table "documents", :force => true do |t|
     t.string   "guid"
     t.string   "content_type"
-    t.string   "content_url",      :limit => 510
-    t.string   "persisted_url"
+    t.string   "content_url",        :limit => 510
+    t.string   "hsss_persisted_url"
     t.date     "last_modified"
     t.text     "extracted_text"
     t.text     "analyzed_text"
@@ -38,14 +38,15 @@ ActiveRecord::Schema.define(:version => 20130210155003) do
     t.string   "state"
     t.text     "state_details"
     t.integer  "municipality_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.datetime "deleted_at"
     t.boolean  "useful"
     t.text     "people"
     t.text     "locations"
     t.text     "organizations"
     t.text     "terms"
+    t.string   "persisted_url"
   end
 
   add_index "documents", ["classification"], :name => "index_documents_on_classification"
