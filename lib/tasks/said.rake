@@ -8,9 +8,13 @@ namespace :said do
   desc 'copy document from hsss_persisted_url original S3 bucket to new persisted_url S3 bucket'
   task :copy_documents_hsss_persisted_url_to_persisted_url => :environment do
     RESIS.flushall
+    i = 0
 
     Document.where("persisted_url is null and hsss_persisted_url is not null").find_in_batches do |group|
       group.each do |document|
+        i = i + 1
+        puts i
+
         UploadDocumentFromHsssS3Bucket.perform_async(document.id, nil)
       end
     end
