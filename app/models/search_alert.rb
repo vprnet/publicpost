@@ -35,7 +35,7 @@ class SearchAlert < ActiveRecord::Base
               text += "#{doc.extracted_text.split(" ")[0..50].join(" ")}\n"
             end
             text += "Original Url:   #{doc.content_url}\n"
-            text += "HSSS Url:       http://ADD_HOSTNAME_HERE/documents/#{doc.guid}\n"
+            text += "HSSS Url:       http://#{ENV['HSSS_MAILER_HOST']}/documents/#{doc.guid}\n"
             text += "Classification: #{doc.classification.humanize}\n"
             text += "Organization:   #{doc.legislative_body.humanize}\n\n"
             results_counter += 1
@@ -47,7 +47,7 @@ class SearchAlert < ActiveRecord::Base
           subject = "Municipal document alert: #{alert.querystring}"
 
           email_data = {
-              "from"          => "search@",
+              "from"          => "publicpost@vpr.net",
               "to"            => "#{alert.user.email}",
               "subject"       => subject,
               "text"          => text
@@ -55,7 +55,7 @@ class SearchAlert < ActiveRecord::Base
 
           http_client = HTTPClient.new
           http_client.set_auth(Constants::MAILGUN_URL, 'api', Constants::MAILGUN_API_KEY)
-          http_client.post(Constants::MAILGUN_URL, email_data)
+          http_client.post(Constants::MAILGUN_URL + "/messages", email_data)
         end
       end
     end
