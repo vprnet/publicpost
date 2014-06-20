@@ -4,7 +4,7 @@ require 'will_paginate/array'
 class MunicipalitiesController < ApplicationController
 
   def index
-    @municipalities = Municipality.all(order: "name asc", conditions: "website != ''").paginate(page: params[:page], :per_page => 2000)
+    @municipalities = Municipality.all(order: "name asc", conditions: "state = 'VT' and website != ''").paginate(page: params[:page], :per_page => 2000)
     @states = @municipalities.group_by(&:state).keys
   end
 

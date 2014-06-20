@@ -1,11 +1,11 @@
 %header.navbar.navbar-fixed-top
   .navbar-inner
     .container
-      = link_to('Municipal Docs', root_path, class: 'brand')
+      = link_to('Public Post', root_path, class: 'brand')
       %nav
         %ul.nav
           = nav_link_to('Documents', documents_path, false)
-          = nav_link_to('Cities', municipalities_path, false)
+          = nav_link_to('Cities & Towns', municipalities_path, false)
           = nav_link_to('Alerts', search_alerts_path, false)
           %li
             - if current_user.nil?
@@ -17,4 +17,3 @@
           .input-append
             %input.search-query{:placeholder => "Building Permits, Pensions, Budgets, Meetings, School Boards", :type => "text", :name => "q"}/
             %button.btn{:type => "submit"} Search
-
