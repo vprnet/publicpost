@@ -12,6 +12,7 @@ HeSaidSheSaid::Application.configure do
   end
 
   config.action_mailer.default_url_options = { :host => ENV["HSSS_MAILER_HOST"] }
+  config.action_mailer.default_options = { from: ENV["MAIL_DEFAULT_FROM"] }
   config.representer.default_url_options = { :host => ENV["HSSS_MAILER_HOST"] }
 
   ActionMailer::Base.smtp_settings = {
@@ -19,7 +20,6 @@ HeSaidSheSaid::Application.configure do
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :from           => ENV["MAIL_DEFAULT_FROM"],
     :domain         => 'publicpost.heroku.com',
     :authentication => :plain,
   }
