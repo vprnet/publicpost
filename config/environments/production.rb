@@ -12,7 +12,6 @@ HeSaidSheSaid::Application.configure do
   end
 
   config.action_mailer.default_url_options = { :host => ENV["HSSS_MAILER_HOST"] }
-  config.action_mailer.default = { from: ENV["MAIL_DEFAULT_FROM"] }
   config.representer.default_url_options = { :host => ENV["HSSS_MAILER_HOST"] }
 
   ActionMailer::Base.smtp_settings = {
