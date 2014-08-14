@@ -2,7 +2,7 @@
 
 /* http://stackoverflow.com/questions/10185384/twitter-bootstrap-responsive-navbar-broken-on-small-screens */
 body {
-  padding-top: 60px;
+  padding-top: 130px;
   padding-bottom: 40px;
 }
 
@@ -22,18 +22,87 @@ html {
   overflow-y: scroll;
 }
 
+:not(.alert) a {
+
+  color:#45a317;
+
+  &:hover {
+    color:#2a5d10;
+  }
+}
+
+.main.page a:not(.btn) {
+  // border-bottom:solid 1px #a6d989;
+}
+
+.alert {
+  padding:15px 15px 5px;
+  text-align:left;
+}
+
 section {
   overflow: auto;
 }
 
+/* header */
+// .navbar .navbar-inner .container {
+.navbar .navbar-inner {
+  border-top:solid 23px #3F4444;
+  box-shadow:inset 0px 1px 0px #72B058;
+  padding-top:0px;
+  background:#509E2F;
+
+  .container li.active a {
+    background:#37661f;
+    box-shadow:none;
+    border-radius:3px;
+  }
+
+  .pull-right.form-search {
+    position:relative;
+    top:22px;
+  }
+
+  .container {
+    nav {
+      position:relative;
+      top:22px;
+    }
+
+    a {
+      color:#FFFFFF;
+      text-shadow:none;
+      font-size:20px;
+      font-weight:300;
+
+      &:hover {
+        color:#EEE;
+        text-shadow:none;
+      }
+    }
+  }
+
+  img {
+    width:120px;
+  }
+}
 
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
+  font-weight:300;
+  color:#666;
 }
 
 /* footer */
+footer.footer {
+  color:#999;
+  padding-top:40px;
+  a {
+    color:#999;
+  }
+}
 
 /* debug */
 
