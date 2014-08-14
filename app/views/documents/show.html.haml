@@ -67,12 +67,12 @@
     %iframe{:src => "#{@document.content_url}", :width => "100%", :height => "600"}
 
   .span3.offset1
-    %h4 People mentioned
-    - unless @document.people.blank?
-      %ul
-        - for person in @document.people.sort
-          %li= link_to "#{person.gsub(/\+/, " ")}", :controller => :documents, :action => :search, :q => person
-    %hr
+    %h4 Document Source
+    %ul
+      %li
+        = url_host @document.content_url
+
+    = render "date_modal"
 
     %h4 Organizations mentioned
     - unless @document.organizations.nil?

@@ -1,3 +1,5 @@
+require "uri"
+
 module ApplicationHelper
 
   def markdown(text)
@@ -45,5 +47,13 @@ module ApplicationHelper
   # Remove superfluous whitespaces from the given string.
   def safe_squeeze(value)
     value = value.strip.gsub(/\s+/, ' ').squeeze(' ').strip unless value.nil?
+  end
+
+  def url_host(url="")
+    begin
+      URI.parse(url).host
+    rescue
+      url
+    end
   end
 end
