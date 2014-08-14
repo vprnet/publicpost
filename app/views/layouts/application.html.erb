@@ -8,6 +8,7 @@
     <meta charset="utf-8">
     <%= render('layouts/shim') %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico">
   </head>
   <body>
     <%= render('layouts/header') %>
@@ -15,9 +16,9 @@
       <% flash.each do |key, value| %>
         <%= content_tag(:div, value, class: "alert alert-#{key}") %>
       <% end %>
-      <%= yield %>
+      <div class="main page"><%= yield %></div>
       <%= render('layouts/footer') %>
-      <%= debug(params) if Rails.env.development? %>
+      <%= debug(params) if Rails.env.development? && params[:debug] %>
     </div>
   </body>
 </html>
