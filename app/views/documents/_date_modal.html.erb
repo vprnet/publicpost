@@ -12,6 +12,9 @@
   </li>
   <li>
     Relevant Date
+    <% if @document.likely_date.nil? %>
+      unknown
+    <% end %>
     <%= time_tag @document.likely_date unless @document.likely_date.nil? %>
   </li>
   <li>
