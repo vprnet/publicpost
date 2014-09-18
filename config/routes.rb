@@ -1,6 +1,9 @@
 require 'sidekiq/web'
 
 HeSaidSheSaid::Application.routes.draw do
+  get "/404", to: "errors#not_found", via: [ :get, :post, :patch, :delete ]
+  get "/422", to: "errors#unacceptable", via: [ :get, :post, :patch, :delete ]
+  get "/500", to: "errors#internal_error", via: [ :get, :post, :patch, :delete ]
 
   devise_for :users
 
