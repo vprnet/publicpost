@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :search_alerts, :dependent => :delete_all
+
+  def display_name
+    (email.to_s.split(/@/)[0].to_s)[0..10]
+  end
 end

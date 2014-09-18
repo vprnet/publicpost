@@ -16,23 +16,10 @@
 .row-fluid
   .span4
     %h3 Perform Research
-    .well
-      %p
-        Research
-        = link_to 'leash law ordinances,', '/documents/search?q=leash+law'
-        = link_to 'post pension benefit plans,', '/documents/search?q=pension'
-        (OPEB),
-        = link_to 'energy savings', '/documents/search?q=energy+savings'
-        (ESCO) and other legislative documents like
-        = link_to 'Select Board', '/documents/search?q=select+board'
-        and
-        = link_to 'City Council', '/documents/search?q=city+council'
-        = link_to 'meeting minutes,', '/documents/search?q=meeting+minutes'
-        = link_to 'agendas,', '/documents/search?q=agenda'
-        = link_to 'crime reports.', '/documents/search?q="crime"'
+    = render "research"
   .span4
     %h3 Stay Informed
-    .well
+    .well{style: "min-height:110px;"}
       %p
         Stay informed about timely, relevant information in local government.
         = link_to 'Create a FREE search alert', "/search_alerts"

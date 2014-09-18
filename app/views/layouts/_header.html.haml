@@ -11,7 +11,7 @@
             - if current_user.nil?
               = link_to 'Sign in', '/users/sign_in'
             - else
-              = link_to "#{current_user.email} (Sign out)", '/users/sign_out', :method => :delete
+              = link_to "#{current_user.display_name}... (Sign out)", '/users/sign_out', :method => :delete
       - if display_search_box?
         %form.navbar-form.pull-right.form-search{:action => "/documents/search"}
           .input-append
