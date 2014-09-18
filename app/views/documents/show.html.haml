@@ -68,9 +68,10 @@
 
   .span3.offset1
     %h4 Document Source
-    %ul
+    %ul{style: "padding:0px;margin-left:15px;"}
       %li
         = url_host @document.content_url
+    %hr
 
     = render "date_modal"
 
