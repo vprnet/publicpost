@@ -15,7 +15,7 @@ gem 'devise', '2.1.2'
 gem 'faker', '1.0.1'
 gem 'fog', '1.10.0' # API for Amazon S3 and other cloud services
 gem 'haml-rails', '0.3.5'
-gem 'httpclient', '2.3.1' # Used to download documents we find
+gem 'httpclient', '2.4.0' # Used to download documents we find
 gem 'jquery-rails', '2.0.2'
 gem 'newrelic_rpm', '3.5.4.34'
 gem 'newrelic-redis', '1.4.0'
