@@ -34,6 +34,7 @@
           %li= link_to "Created Date", documents_path(params.except(:controller, :action).merge(:state => @state, :sort_by => "created_at"))
           %li= link_to "Updated Date", documents_path(params.except(:controller, :action).merge(:state => @state, :sort_by => "updated_at"))
 
+
     %br
 
 - for document in @documents.order("likely_date desc nulls last")
@@ -73,6 +74,16 @@
               %small
                 =link_to CGI::unescape(document.content_url.ellipsisize(100,50)), document.content_url
       %br
+
+    .span4
+      %div
+
+        %div= vpr_medium_1
+        %br
+        %div= vpr_medium_2
+        %br
+        %div= vpr_medium_3
+
 
 .row
   .span8.pagination-centered

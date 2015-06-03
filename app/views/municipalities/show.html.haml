@@ -110,3 +110,12 @@
             %th Lat/Long
             %td
               = link_to "#{number_with_delimiter @municipality.latitude} #{number_with_delimiter @municipality.longitude}", "https://maps.google.com/?q=#{@municipality.latitude},#{number_with_delimiter @municipality.longitude}"
+      .row
+        .span4
+          %div{style: "margin-left:50px"}
+
+            %div= vpr_medium_1
+            %br
+            %div= vpr_medium_2
+            %br
+            %div= vpr_medium_3

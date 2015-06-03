@@ -101,3 +101,11 @@
       %ul
       - for term in @document.terms
         %li= link_to "#{term[0].gsub(/\+/, " ")} (#{term[1]})", :controller => :documents, :action => :search, :q => term[0]
+
+    %hr
+
+    %div= vpr_medium_1
+    %br
+    %div= vpr_medium_2
+    %br
+    %div= vpr_medium_3

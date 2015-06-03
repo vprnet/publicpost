@@ -9,14 +9,32 @@
     <%= render('layouts/shim') %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico">
+    <%= vpr_widget_header %>
+    <style media="screen">
+      .static_pages_home .vpr_leaderboard { margin:0px auto; }
+    </style>
   </head>
-  <body>
+  <body class="<%= [controller_name, action_name].join('_') %>">
     <%= render('layouts/header') %>
+
     <div class="container-fluid">
+
+      <div class="row-fluid">
+        <div class="span10 pagination-centered">
+          <%= vpr_leader_board %>
+          <br>
+          <br>
+        </div>
+      </div>
+
       <% flash.each do |key, value| %>
         <%= content_tag(:div, value, class: "alert alert-#{key}") %>
       <% end %>
-      <div class="main page"><%= yield %></div>
+      <div class="main page">
+
+
+        <%= yield %>
+      </div>
       <%= render('layouts/footer') %>
       <%= debug(params) if Rails.env.development? && params[:debug] %>
     </div>
