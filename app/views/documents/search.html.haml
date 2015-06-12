@@ -91,6 +91,15 @@
               - else
                 = link_to "#{term['term'].humanize} (#{term['count']})", documents_search_path(:q => "#{params[:q]} #{facet[0].downcase}:#{term['term']}")
 
+    .span3.offset1
+      %div
+        %div= vpr_medium_1
+        %br
+        %div= vpr_medium_2
+        %br
+        %div= vpr_medium_3
+
+
 .row
   .span8
     - if !current_user.nil?
