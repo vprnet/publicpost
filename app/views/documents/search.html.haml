@@ -91,7 +91,7 @@
               - else
                 = link_to "#{term['term'].humanize} (#{term['count']})", documents_search_path(:q => "#{params[:q]} #{facet[0].downcase}:#{term['term']}")
 
-    .span3.offset1
+    .span3
       %div
         %div= vpr_medium_1
         %br
